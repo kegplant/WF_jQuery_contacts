@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Contacts</title>
+        <link rel="stylesheet" type="text/css" href="contacts.css">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"> </script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('p').hide();
+            //form submit, same as users
+            $('form').submit(function(event){
+                event.preventDefault();
+                var ele1='<h2>'+$('#firstName').val()+' '+$('#lastName').val()+'</h2>';
+                var ele2='<h5>click for description</h5>';
+                var ele3='<p>'+$('#description').val()+'</p>';
+                $('.cardHolder').append('<div>'+ele1+ele2+ele3+'</div>');
+                $('.cardHolder').children('div:last-of-type').children('p').hide();
+                if($('.cardHolder').children('div:last-of-type').css('height')<'60px'){
+                    $('.cardHolder').children('div:last-of-type').remove();
+                    alert('Please fill out contact info');
+                }else{
+                    $('form input, form textarea').val('');
+                }
+                return false;
+            });
+            //click to hide / show siblings
+            $('.cardHolder').on('click','div',function(){
+                $(this).children('h2, h5').toggle();
+                $(this).children('p').toggle();
+            })
+        });
+        </script>
+    </head>
+    <body>
+        <form action="process.php">
+            <label>
+                First name: <input type="text" id="firstName">
+            </label>
+            <label>
+                Last name: <input type="text" id="lastName">
+            </label>
+            <label>Description:</label>
+            <textarea placeholder="Enter description:" id="description"></textarea>
+            <button>Add User</button>
+        </form>
+        <div class='cardHolder'>
+            <div>
+                <h2>Michael Choi</h2>
+                <h5>click for description!</h5>
+                <p>Codingdojo's fearless leader. Master of instruction.</p>
+            </div>
+            <div>
+                <h2>Michael Choi</h2>
+                <h5>click for description!</h5>
+                <p>Codingdojo's fearless leader. Master of instruction.</p>
+            </div>
+            <div>
+                <h2>Michael Choi</h2>
+                <h5>click for description!</h5>
+                <p>Codingdojo's fearless leader. Master of instruction.</p>
+            </div>
+        </div>
+    </body>
+</html>
